@@ -1,0 +1,49 @@
+// Assuming products array remains unchanged
+const products = [
+  {
+    id: 1, // Add unique IDs to each product
+    name: "Strawberry Mocha",
+    image: require("../Images/Strawberry-Latte-New.png"),
+    price: "$5.99",
+    backgroundColor: "bg-rose-400",
+  },
+  {
+    id: 2,
+    name: "Vanilla Espresso",
+    image: require("../Images/caramel-frappuccino.png"),
+    price: "$6.49",
+    backgroundColor: "bg-yellow-900",
+  },
+  {
+    id: 3,
+    name: "Ice Frappuccino",
+    image: require("../Images/Coffee-Frappe-removebg-preview.png"),
+    price: "$6.99",
+    backgroundColor: "bg-amber-500",
+  },
+  // Add more products here
+];
+
+const handleAddToCart = (productId, selectedSize) => {
+  const selectedProduct = products.find((product) => product.id === productId);
+
+  if (selectedProduct) {
+    if (selectedSize) {
+      setCart((prevCart) => [
+        ...prevCart,
+        {
+          id: selectedProduct.id,
+          image: selectedProduct.image,
+          name: selectedProduct.name,
+          price: selectedProduct.price,
+          size: selectedSize,
+        },
+      ]);
+      setSize(''); // Reset the size after adding to cart
+    } else {
+      alert("Please select a size before adding to cart.");
+    }
+  } else {
+    alert("Product not found.");
+  }
+};
