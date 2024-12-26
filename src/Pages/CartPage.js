@@ -36,7 +36,7 @@ const CartPage = ({ cartItems }) => {
             <h2 className="text-lg font-bold">Total: ₦{totalPrice.toFixed(2)}</h2>
             <button
               onClick={handleCheckout}
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+              className="mt-4 px-4 py-2 bg-coffee-400 text-white rounded"
             >
               Proceed to Checkout
             </button>

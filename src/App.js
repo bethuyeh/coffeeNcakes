@@ -10,7 +10,7 @@ import CartPage from "./Pages/CartPage";
 import Checkout from "./Pages/Checkout";
 import Payment from "./Pages/Payment";
 import About from "./Pages/About";
-import PickACoffee from "./Pages/PickACofee";
+import PickACoffee from "./Pages/PickACoffee";
 import Contact from "./Pages/Contact";
 
 

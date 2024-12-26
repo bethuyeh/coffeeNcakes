@@ -60,7 +60,7 @@ const Navbar = ({ cartCount }) => {
 
         {/* Cart Icon */}
         <div className="relative cursor-pointer">
-          <Link to="/cart">
+          <Link to="/checkout">
             <FaShoppingCart size={24} className="text-gray-800" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">

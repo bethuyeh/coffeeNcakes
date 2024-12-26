@@ -89,7 +89,7 @@ const Checkout = ({ cartItems, handleAddItem, handleRemoveItem }) => {
               </h3>
               <button
                 onClick={handlePayment}
-                className="bg-coffee-400 text-white px-6 py-2 rounded shadow mt-4 hover:bg-[#6F4E37] transition"
+                className="bg-coffee-600 text-white px-6 py-2 rounded shadow mt-4 hover:bg-coffee-800 transition"
               >
                 Pay Now
               </button>
