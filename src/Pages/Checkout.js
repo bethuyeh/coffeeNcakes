@@ -18,15 +18,13 @@ const Checkout = ({ cartItems, handleAddItem, handleRemoveItem }) => {
     navigate("/payment", { state: { cartItems } });
   };
 
-  
-
   return (
-    <div className="min-h-screen bg-[#F8F5F1] p-6">
-      <h1 className="text-4xl text-[#4B371C] font-bold text-center mb-8">
+    <div className="min-h-screen bg-[#F8F5F1] p-4 sm:p-6">
+      <h1 className="text-3xl sm:text-4xl text-[#4B371C] font-bold text-center mb-6 sm:mb-8">
         Checkout
       </h1>
 
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-4xl mx-auto">
+      <div className="bg-white shadow-md rounded-lg p-4 sm:p-6 max-w-4xl mx-auto">
         {cartItems.length === 0 ? (
           <p className="text-center text-gray-600">
             Your cart is empty. Add some items!
@@ -34,11 +32,11 @@ const Checkout = ({ cartItems, handleAddItem, handleRemoveItem }) => {
         ) : (
           <div>
             {/* Cart Items */}
-            <ul>
+            <ul className="space-y-4">
               {cartItems.map((item) => (
                 <li
                   key={`${item.id}-${item.size}`}
-                  className="flex items-center justify-between py-4 border-b border-gray-300"
+                  className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 py-4 border-b border-gray-300"
                 >
                   {/* Product Image */}
                   <div className="flex items-center space-x-4">
@@ -48,48 +46,50 @@ const Checkout = ({ cartItems, handleAddItem, handleRemoveItem }) => {
                       className="w-16 h-16 rounded object-cover"
                     />
                     <div>
-                      <h2 className="text-lg font-semibold text-[#4B371C]">
+                      <h2 className="text-base sm:text-lg font-semibold text-[#4B371C]">
                         {item.name} ({item.size})
                       </h2>
                       <p className="text-sm text-gray-500">
-                       ₦{item.price.toFixed(2)} each
+                        ₦{item.price.toFixed(2)} each
                       </p>
                     </div>
                   </div>
 
                   {/* Quantity and Actions */}
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2 sm:space-x-4">
                     <button
                       onClick={() => handleRemoveItem(item)}
-                      className="bg-[#D2691E] text-white px-4 py-1 rounded shadow hover:bg-[#A0522D] transition"
+                      className="bg-[#D2691E] text-white px-3 py-1 rounded shadow hover:bg-[#A0522D] transition text-sm sm:text-base"
                     >
                       -
                     </button>
-                    <p className="text-lg text-gray-800">{item.quantity}</p>
+                    <p className="text-base sm:text-lg text-gray-800">
+                      {item.quantity}
+                    </p>
                     <button
                       onClick={() => handleAddItem(item)}
-                      className="bg-[#4B371C] text-white px-4 py-1 rounded shadow hover:bg-[#6F4E37] transition"
+                      className="bg-[#4B371C] text-white px-3 py-1 rounded shadow hover:bg-[#6F4E37] transition text-sm sm:text-base"
                     >
                       +
                     </button>
                   </div>
 
                   {/* Subtotal */}
-                  <p className="text-lg font-semibold text-gray-800">
-                  ₦{(item.price * item.quantity).toFixed(2)}
+                  <p className="text-base sm:text-lg font-semibold text-gray-800">
+                    ₦{(item.price * item.quantity).toFixed(2)}
                   </p>
                 </li>
               ))}
             </ul>
 
             {/* Total and Pay Now */}
-            <div className="mt-6 text-right">
-              <h3 className="text-2xl font-bold text-[#4B371C]">
+            <div className="mt-6 text-center sm:text-right">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#4B371C]">
                 Total: ₦{total.toFixed(2)}
               </h3>
               <button
                 onClick={handlePayment}
-                className="bg-coffee-600 text-white px-6 py-2 rounded shadow mt-4 hover:bg-coffee-800 transition"
+                className="bg-[#4B371C] text-white px-4 py-2 sm:px-6 sm:py-3 rounded shadow mt-4 hover:bg-[#6F4E37] transition text-sm sm:text-base"
               >
                 Pay Now
               </button>
