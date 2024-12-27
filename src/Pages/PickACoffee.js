@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import products from "./ProductsData"; // Import products array
+import products from "./ProductsData"; // Import your products data
 
-const CoffeeSlider = ({ handleAddToCart }) => {
-  const [currentIndex, setCurrentIndex] = useState(0); // Track current product
-  const [quantity, setQuantity] = useState(1); // Track quantity
-  const [size, setSize] = useState(""); // Track selected size
+const PickACoffee = ({ handleAddToCart }: { handleAddToCart: (product: any) => void }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState("");
 
   // Navigate slider
   const prevPage = () => {
@@ -26,7 +26,7 @@ const CoffeeSlider = ({ handleAddToCart }) => {
         ...selectedProduct,
         size,
         quantity,
-        price: selectedProduct.price, // Price is already a number
+        price: selectedProduct.price,
       });
       alert(
         `${selectedProduct.name} (${size}) added to cart. Quantity: ${quantity}`
@@ -41,82 +41,60 @@ const CoffeeSlider = ({ handleAddToCart }) => {
     setSize(selectedSize);
   };
 
+  const currentProduct = products[currentIndex];
+
   return (
-    <div className="flex flex-col lg:flex-row h-full lg:h-[90vh] w-full relative ">
-      {/* Left Section: Slider */}
-      <div className="w-full lg:w-1/4 bg-zinc-100 border-gray-200 border-2 flex justify-center items-center relative">
-        <button
-          onClick={prevPage}
-          className="absolute left-2 lg:left-0 bg-gray-200 p-2 rounded-full shadow-sm hover:bg-gray-300 transition"
-        >
-          <FiChevronLeft size={24} />
-        </button>
-
-        <div className="overflow-hidden w-full flex justify-center items-center">
-          <div className="flex flex-col items-center">
-            <img
-              src={products[currentIndex].image}
-              alt={products[currentIndex].name}
-              className="w-16 h-16 lg:w-20 lg:h-20 object-contain mx-auto"
-            />
-            <p className="text-gray-700 mt-2 text-sm lg:text-base">
-              {products[currentIndex].name}
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={nextPage}
-          className="absolute right-2 lg:right-0 bg-gray-200 p-2 rounded-full shadow-sm hover:bg-gray-300 transition"
-        >
-          <FiChevronRight size={24} />
-        </button>
-      </div>
-
-      {/* Center Section: Large Coffee Image */}
-      <div className="w-full lg:w-2/4 bg-gray-50 flex justify-center items-center relative">
-        <img
-          src={products[currentIndex].image}
-          alt={products[currentIndex].name}
-          className="w-[40vh] lg:w-[60vh] h-[50vh] lg:h-[80vh] object-contain z-10 transition-all duration-500 ease-in-out"
-        />
-      </div>
-
-      {/* Right Section: Price, Quantity, Size, and Add to Cart */}
-      <div
-        className={`w-full lg:w-1/4 p-6 flex flex-col justify-center items-center text-white transition-colors duration-500 ${products[currentIndex].backgroundColor}`}
+    <div
+      className={`flex flex-col items-center justify-center h-screen w-full relative ${products[currentIndex].backgroundColor} `}
+      style={{ backgroundColor: currentProduct.backgroundColor }} // Dynamically set background color
+    >
+      {/* Arrows */}
+      <button
+        onClick={prevPage}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-sm hover:bg-gray-300 z-10"
       >
-        <h2 className="text-3xl lg:text-4xl font-bold mb-2">
-          ₦{products[currentIndex].price}
-        </h2>
-        <p className="text-lg lg:text-xl mb-4">
-          {products[currentIndex].name}
-        </p>
+        <FiChevronLeft size={24} />
+      </button>
+      <button
+        onClick={nextPage}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-sm hover:bg-gray-300 z-10"
+      >
+        <FiChevronRight size={24} />
+      </button>
 
-        {/* Size Selection */}
-        <div className="mt-4">
-          <p className="text-base lg:text-lg mb-2">Select Size</p>
-          <div className="flex space-x-2 lg:space-x-4">
-            {["Small", "Medium", "Large"].map((s) => (
-              <button
-                key={s}
-                onClick={() => handleSize(s)}
-                className={`px-3 py-1 lg:px-4 lg:py-2 rounded text-sm lg:text-base ${
-                  size === s
-                    ? "bg-coffee-600 text-white"
-                    : "bg-white text-coffee-600"
-                }`}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
+      {/* Product Details */}
+      <div className="flex flex-col items-center justify-center text-center space-y-4">
+        <img
+          src={currentProduct.image}
+          alt={currentProduct.name}
+          className="w-[300px] h-[300px] object-contain"
+        />
+        <h2 className="text-xl font-bold">{currentProduct.name}</h2>
+        <h3 className="text-2xl font-bold text-white">
+          ₦{currentProduct.price}
+        </h3>
+
+        {/* Size Selector */}
+        <div className="flex space-x-4">
+          {["Small", "Medium", "Large"].map((s) => (
+            <button
+              key={s}
+              onClick={() => handleSize(s)}
+              className={`px-4 py-2 rounded-full ${
+                size === s
+                  ? "bg-coffee-600 text-white"
+                    :"bg-white text-coffee-600"
+              }`}
+            >
+              {s}
+            </button>
+          ))}
         </div>
 
         {/* Add to Cart Button */}
         <button
           onClick={handleAdd}
-          className="bg-white text-coffee-800 mt-6 px-4 py-2 lg:px-6 lg:py-2 rounded"
+          className="bg-white text-black px-6 py-3 rounded-md"
         >
           Add to Cart
         </button>
@@ -125,4 +103,4 @@ const CoffeeSlider = ({ handleAddToCart }) => {
   );
 };
 
-export default CoffeeSlider;
+export default PickACoffee;

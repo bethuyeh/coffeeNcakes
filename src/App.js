@@ -84,7 +84,8 @@ function App() {
           />
           <Route path="about" element={<About  />} />
           <Route path="contact" element={<Contact  />} />
-          <Route path="menu" element={<PickACoffee handleAddToCart={handleAddToCart} />} />
+          <Route path="menu" element={ <PickACoffee handleAddToCart={handleAddToCart} />
+  } />
           <Route path="/cart" element={<CartPage cartItems={cartItems} />} />
           <Route
             path="/checkout"
