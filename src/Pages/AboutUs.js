@@ -25,7 +25,7 @@ const AboutUs = () => {
           {/* Number and Title */}
           <div className="relative">
             <h1 className="text-7xl font-extrabold text-zinc-300 absolute  top-0 z-0">
-              0102
+              01
             </h1>
             <h1 className="relative py-5 -right-16 text-lg md:text-4xl font-bold text-amber-800 z-10">
               WE'VE GOT YOU!
